@@ -35,6 +35,9 @@ on:
       repo:
         description: 'Name of the repo. Default current'
         required: true
+      username:
+        description: 'Member GitHub User Name whose commits details is required.'
+        required: true
 
 jobs:
   member-contribution-report:
@@ -51,6 +54,7 @@ jobs:
           days: ${{ inputs.days }}
           repo: ${{ inputs.repo }}
           org: ${{ inputs.org }} 
+          username: ${{ inputs.username }}
 ```
 
 ## GitHub secrets
@@ -72,6 +76,7 @@ jobs:
 | `org`             | Organization different than workflow context                  |                             |                                                                                                                                                                                    | `true`  |
 | `days`            | Amount of days in the past to collect data for                | `7`                        |                                                                                                                                                                                    | `true`  |
 | `repo`            | Name of Repo            | current repo in which action is running             | any other repo of org | `true`  |
+| `username`            | Name of Member whose commits details is required          | None             | any name of organization | `true`  |
 
 ## Workflow dispatch inputs
 

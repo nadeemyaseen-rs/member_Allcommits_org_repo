@@ -16,6 +16,9 @@ inputs:
   repo:
     description: 'Name of Repo'
     required: true
+  username:
+    description: 'Member GitHub User Name whose commits details is required.'
+    required: true
 runs:
   using: 'node16'
   main: 'dist/index.js'
