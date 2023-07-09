@@ -11772,12 +11772,16 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData) {
         });
 
       uniqueOids.push(...Array.from(oidSet));
-      jsonData = getComitResult
 
     } while (hasNextPageMember)
   } catch (error) {
     core.setFailed(error.message)
   }
+  const totalcommits = uniqueOids.length
+  console.log(`Total number of uniques commits are: ${totalcommits}`)
+  console.log('')
+  console.log('Details of commits is:')
+  console.log(JSON.stringify(getComitResult, null, 2))
   //console.log(uniqueOids);
 
 }
@@ -11815,12 +11819,6 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData) {
     const uniqueOids = [] 
     console.log(`Retrieving ${logDate} of ${uname} commits in ${org}/${repo}:`)
     await getAllBranchComits(uid,from,uniqueOids,jsonData)
-
-    const totalcommits = uniqueOids.length
-    console.log(`Total number of uniques commits are: ${totalcommits}`)
-    console.log('')
-    console.log('Details of commits is:')
-    console.log(JSON.stringify(jsonData, null, 2))
   } catch (error) {
     core.setFailed(error.message)
   }
