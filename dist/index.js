@@ -11794,7 +11794,7 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData) {
     }`
     getUserIdResult = await octokit.graphql({
       query,
-      uname
+      username: uname
     })
   
   const uid = getUserIdResult.user.id    
