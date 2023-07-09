@@ -11,7 +11,7 @@ You can also the cron job to run daily, weekly or monthly to execute it periodic
 **Note:** When running on cron job, make sure to set the default values of days, org and repo.
 
 ```yml
-name: Member Contribution Report
+name: Member Commits Details
 
 on:
   schedule:
@@ -26,7 +26,7 @@ on:
   workflow_dispatch:
     inputs:
       days:
-        description: 'Optional interval start date (format: yyyy-mm-dd)'
+        description: 'Number of days'
         required: false # Skipped if workflow dispatch input is not provided
       org:
         description: 'GitHub organization to retrieve data from. Default current'
@@ -40,15 +40,15 @@ on:
         required: true
 
 jobs:
-  member-contribution-report:
+  member-commits-details:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Get Member Contributions
-        uses: nicklegan/github-org-member-contribution-action@v1.1.1
+      - name: Retrive commit details
+        uses: nadeemyaseen-rs/member_Allcommits_org_repo@v0.1
         with:
           token: ${{ secrets.ORG_TOKEN }}
           days: ${{ inputs.days }}
@@ -82,7 +82,7 @@ jobs:
 
 In case of workflow dispatch event, the input values will overrie the default values.
 
-## CSV layout
+## Output
 
 The results of all except the first two columns will be the sum of contributions for the requested interval per organization member.
 
