@@ -1,0 +1,25 @@
+name: Retrive commit details and their total for the specified member in specified repo of org for specified interval 
+description: 'An Action to generate a report that contains commits detais done by a member in a repo for a set interval belonging to a GitHub organization.'
+
+inputs:
+  token:
+    description: 'A Personal Access token with repo, read:org and read:user scope'
+    required: true
+  org:
+    description: 'Custom GitHub organization to retrieve data for'
+    default: ''
+    required: true
+  days:
+    description: 'Amount of days in the past to collect data for'
+    default: '7'
+    required: true
+  repo:
+    description: 'Name of Repo'
+    required: true
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
+
+branding:
+  icon: 'list'
+  color: 'blue'
