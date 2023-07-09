@@ -11762,7 +11762,7 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData) {
       }
 
       const oidSet = new Set();
-      console.log(JSON.stringify(getComitResult, null, 2))
+      
       getComitResult.repository.refs.edges.forEach((edge) => {
         if (edge.node.target.history.edges.length > 0) {
           edge.node.target.history.edges.forEach((historyEdge) => {
@@ -11770,6 +11770,8 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData) {
           });
         }
       })
+
+      console.log(JSON.stringify(getComitResult, null, 2))
 
       uniqueOids.push(...Array.from(oidSet));
       jsonData = { ...jsonData, ...currentData }
