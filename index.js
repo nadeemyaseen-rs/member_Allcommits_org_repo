@@ -94,9 +94,9 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData) {
       })
 
       //const ComitObj = getComitResult.organization.repositories.nodes
-      hasNextPageMember = getComitResult.rorepository.refs.pageInfo.hasNextPage
+      hasNextPageMember = getComitResult.repository.refs.pageInfo.hasNextPage
       if (hasNextPageMember) {
-        paginationMember = getComitResult.rrepository.refs.pageInfo.endCursor
+        paginationMember = getComitResult.repository.refs.pageInfo.endCursor
       } else {
         paginationMember = null
       }
@@ -120,7 +120,7 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData) {
       console.log(JSON.stringify(getComitResult, null, 2))
 
       uniqueOids.push(...Array.from(oidSet));
-      jsonData = { ...jsonData, ...currentData }
+      jsonData = { ...jsonData, ...getComitResult }
 
     } while (hasNextPageMember)
   } catch (error) {
@@ -161,7 +161,7 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData) {
     // Take time, org/repo parameters and init array to get all commits
     const jsonData = {}
     const uniqueOids = [] 
-    console.log(`Retrieving ${logDate} of member commit data in the ${org}/${repo}:`)
+    console.log(`Retrieving ${logDate} of ${uname} commit data in the ${org}/${repo}:`)
     await getAllBranchComits(uid,from,uniqueOids,jsonData)
 
     const totalcommits = uniqueOids.length
