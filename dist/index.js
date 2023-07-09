@@ -11763,21 +11763,13 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData) {
 
       const oidSet = new Set();
       
-      if (getComitResult.repository.refs) {
-        console.log('1st condition covered')
-        if(getComitResult.repository.refs.edges){
-          console.log('2nd condition covered')
         getComitResult.repository.refs.edges.forEach((edge) => {
           if (edge.node.target.history.edges.length > 0) {
-            console.log('third condtion covered')
             edge.node.target.history.edges.forEach((historyEdge) => {
-              uniqueOids.add(historyEdge.node.oid);
+              oidSet.add(historyEdge.node.oid);
             });
           }
         });
-      }}
-
-      console.log(JSON.stringify(getComitResult, null, 2))
 
       uniqueOids.push(...Array.from(oidSet));
       jsonData = { ...jsonData, ...getComitResult }
@@ -11821,13 +11813,13 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData) {
     // Take time, org/repo parameters and init array to get all commits
     const jsonData = {}
     const uniqueOids = [] 
-    console.log(`Retrieving ${logDate} of ${uname} commit data in the ${org}/${repo}:`)
+    console.log(`Retrieving ${logDate} of ${uname} commits in ${org}/${repo}:`)
     await getAllBranchComits(uid,from,uniqueOids,jsonData)
 
     const totalcommits = uniqueOids.length
-    console.log('Total number of commits are: ${totalcommits} ')
+    console.log('Total number of uniques commits are: ${totalcommits} ')
     console.log('')
-    console.log('These commits are made as fellows:')
+    console.log('Details of commits is:')
     console.log(JSON.stringify(jsonData, null, 2))
   } catch (error) {
     core.setFailed(error.message)
