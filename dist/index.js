@@ -11799,11 +11799,13 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData) {
   
   const uid = getUserIdResult.user.id    
 
+    let to
     let from
     let days
     let logDate
       
     days = core.getInput('days', {required: true}) || '7'
+    to = new Date()
     from = new Date()
     from.setDate(to.getDate() - days)
     logDate = `${days} days`
