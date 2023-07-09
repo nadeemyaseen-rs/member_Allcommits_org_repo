@@ -11772,7 +11772,7 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData) {
         });
 
       uniqueOids.push(...Array.from(oidSet));
-      jsonData = { ...jsonData, ...getComitResult }
+      jsonData = getComitResult
 
     } while (hasNextPageMember)
   } catch (error) {
@@ -11817,7 +11817,7 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData) {
     await getAllBranchComits(uid,from,uniqueOids,jsonData)
 
     const totalcommits = uniqueOids.length
-    console.log('Total number of uniques commits are: ${totalcommits} ')
+    console.log(`Total number of uniques commits are: ${totalcommits}`)
     console.log('')
     console.log('Details of commits is:')
     console.log(JSON.stringify(jsonData, null, 2))
