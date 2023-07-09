@@ -11753,6 +11753,7 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData) {
         after: paginationMember
       })
 
+      console.log(JSON.stringify(getComitResult, null, 2))
       //const ComitObj = getComitResult.organization.repositories.nodes
       hasNextPageMember = getComitResult.rorepository.refs.pageInfo.hasNextPage
       if (hasNextPageMember) {
