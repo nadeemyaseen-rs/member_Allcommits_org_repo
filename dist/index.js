@@ -11696,6 +11696,9 @@ const octokit = new MyOctokit({
     onAbuseLimit: (retryAfter, options, octokit) => {
       // does not retry, only logs a warning
       octokit.log.warn(`Abuse detected for request ${options.method} ${options.url}`)
+    },
+    onSecondaryRateLimit: (retryAfter, options, octokit) => {
+      octokit.log.warn(`Secondary rate limit reached for request ${options.method} ${options.url}`)
     }
   }
 })
