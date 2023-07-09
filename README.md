@@ -1,4 +1,4 @@
-# GitHub Organization Member Contribution in one repositroy Report Action
+# GitHub Organization Member Commits Details in one repositroy Report Action
 
 > A GitHub Action to generate a report showing specified member commits in the specified repository for the specified days.
 
