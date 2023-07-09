@@ -1,5 +1,5 @@
 name: Retrive commit details and their total for the specified member in specified repo of org for specified interval 
-description: 'An Action to generate a report that contains commits detais done by a member in a repo for a set interval belonging to a GitHub organization.'
+description: 'An Action to generate a report containing commits detais of a member in a repo/org for given days'
 
 inputs:
   token:
@@ -25,4 +25,4 @@ runs:
 
 branding:
   icon: 'list'
-  color: 'blue'
+  color: 'black'
