@@ -11764,9 +11764,11 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData) {
       const oidSet = new Set();
       
       getComitResult.repository.refs.edges.forEach((edge) => {
+          console.log('nameeeeeeeeeeee')
         if (edge.node.target.history.edges.length > 0) {
           edge.node.target.history.edges.forEach((historyEdge) => {
             uniqueOids.add(historyEdge.node.oid);
+            console.log(uniqueOids)
           });
         }
       })
