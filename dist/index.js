@@ -11771,7 +11771,8 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData) {
           }
         });
 
-      uniqueOids.push(...Array.from(oidSet));
+      uniqueOids.push(...Array.from(oidSet))
+      jsonData = getComitResult
 
     } while (hasNextPageMember)
   } catch (error) {
@@ -11781,7 +11782,7 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData) {
   console.log(`Total number of uniques commits are: ${totalcommits}`)
   console.log('')
   console.log('Details of commits is:')
-  console.log(JSON.stringify(getComitResult, null, 2))
+  console.log(JSON.stringify(jsonData, null, 2))
   //console.log(uniqueOids);
 
 }
