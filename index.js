@@ -112,7 +112,7 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData) {
         });
 
       uniqueOids.push(...Array.from(oidSet))
-      jsonData = getComitResult
+      jsonData = { ...jsonData, ...getComitResult }
 
     } while (hasNextPageMember)
   } catch (error) {
