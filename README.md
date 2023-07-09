@@ -6,9 +6,9 @@
 
 Copy paste the below YAML file in `.github/workflows/member_contribution.yml` of any repository of your organization. 
 
-You can also the cron job to run daily, weekly or monthly to execute it periodically. 
+You can also run a cron job on daily, weekly or monthly basis to get the data. 
 
-**Note:** When running on cron job, make sure to set the default values of days, org and repo.
+**Note:** When running on cron job, make sure to set the default values of user name, days, org and repo.
 
 ```yml
 name: Member Commits Details
@@ -84,15 +84,68 @@ In case of workflow dispatch event, the input values will overrie the default va
 
 ## Output
 
-The results of all except the first two columns will be the sum of contributions for the requested interval per organization member.
+It prints the following output:
 
-| Column                   | Description                                                     |
-| :----------------------- | :-------------------------------------------------------------- |
-| Member                   | Username of the organization member                             |
-| Name of Repo | Repo from which data is retrived                   |
-| Commits created          | total commits                     |
+```
+Retrieving 4 days of nadeemyaseen-rs commits in RapidSilicon/Test_Release:
+Total number of uniques commits are: 8
 
-A CSV report file to be printed
+Details of commits is:
+{
+  "repository": {
+    "refs": {
+      "edges": [
+        {
+          "node": {
+            "name": "main",
+            "target": {
+              "history": {
+                "edges": [
+                  {
+                    "node": {
+                      "oid": "58bc20a436e8863ad8ce9c597ec88119e0915d24",
+                      "author": {
+                        "name": "Nadeem Yaseen",
+                        "email": "86344264+nadeemyaseen-rs@users.noreply.github.com",
+                        "date": "2023-07-06T14:34:51+05:00"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "name": "nadeemyaseen-rs-patch-1",
+            "target": {
+              "history": {
+                "edges": []
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "name": "test_branch",
+            "target": {
+              "history": {
+                "edges": []
+              }
+            }
+          }
+        }
+      ],
+      "pageInfo": {
+        "hasNextPage": false,
+        "endCursor": "Mw"
+      }
+    }
+  }
+}
+
+```
 
 ## GitHub App authentication
 
