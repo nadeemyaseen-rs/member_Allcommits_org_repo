@@ -11816,10 +11816,10 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData,username) {
     const uniqueOids = []
     console.log(`Retrieving ${logDate} of ${uname} commits in ${org}/${repo}:`)
     console.log(' ')
-    for (const username of uname){ 
+    for (const username of usernames){ 
     getUserIdResult = await octokit.graphql({
       query,
-      username: uname
+      username: username
     })
     const uid = getUserIdResult.user.id  
     await getAllBranchComits(uid,from,uniqueOids,jsonData,username)
