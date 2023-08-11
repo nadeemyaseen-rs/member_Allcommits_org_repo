@@ -11,6 +11,7 @@ const token = core.getInput('token', {required: true})
 ///////////////// added by nadeem ///////////////////
 const repo = core.getInput('repo', { required: false }) || github.context.repo.repo
 const uname = core.getInput('username', {required: true})
+const usernames = uname.split(',')
 const fs = require('fs');
 const readline = require('readline');
 /////////////////////////////////////////////////////
@@ -45,7 +46,7 @@ const octokit = new MyOctokit({
 
 ///////////////// added by nadeem ///////////////////////////
 // Query all commits of given user in all Repos of org from given time
-async function getAllBranchComits(uid,from,uniqueOids,jsonData) {
+async function getAllBranchComits(uid,from,uniqueOids,jsonData,username) {
   let paginationMember = null
   const query = `query ($org: String!, $repo: String!, $uid: ID, $from: GitTimestamp, $after: String) {
     repository(name: $repo, owner: $org) {
@@ -119,10 +120,10 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData) {
     core.setFailed(error.message)
   }
   const totalcommits = uniqueOids.length
-  console.log(`Total number of uniques commits are: ${totalcommits}`)
-  console.log('')
-  console.log('Details of commits is:')
-  console.log(JSON.stringify(jsonData, null, 2))
+  console.log(`${username}, ${totalcommits}`)
+  //console.log('')
+  //console.log('Details of commits is:')
+  //console.log(JSON.stringify(jsonData, null, 2))
   //console.log(uniqueOids);
 
 }
@@ -137,12 +138,7 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData) {
         id
       }
     }`
-    getUserIdResult = await octokit.graphql({
-      query,
-      username: uname
-    })
   
-  const uid = getUserIdResult.user.id    
 
     let to
     let from
@@ -157,9 +153,17 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData) {
 
     // Take time, org/repo parameters and init array to get all commits
     const jsonData = {}
-    const uniqueOids = [] 
+    const uniqueOids = []
     console.log(`Retrieving ${logDate} of ${uname} commits in ${org}/${repo}:`)
-    await getAllBranchComits(uid,from,uniqueOids,jsonData)
+    console.log(' ')
+    for (const username of uname){ 
+    getUserIdResult = await octokit.graphql({
+      query,
+      username: uname
+    })
+    const uid = getUserIdResult.user.id  
+    await getAllBranchComits(uid,from,uniqueOids,jsonData,username)
+    }
   } catch (error) {
     core.setFailed(error.message)
   }
