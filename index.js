@@ -124,8 +124,8 @@ async function getAllBranchComits(uid,from,username) {
   let totalcommits = uniqueOids.length
   console.log(`${username}, ${totalcommits}`)
   //console.log('')
-  console.log('Details of commits is:')
-  console.log(JSON.stringify(jsonData, null, 2))
+  //console.log('Details of commits is:')
+  //console.log(JSON.stringify(jsonData, null, 2))
   //console.log(uniqueOids);
 
 }
