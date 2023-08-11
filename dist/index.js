@@ -11784,8 +11784,6 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData,username) {
   //console.log('')
   console.log('Details of commits is:')
   console.log(JSON.stringify(jsonData, null, 2))
-  jsonData = {}
-  uniqueOids = []
   //console.log(uniqueOids);
 
 }
@@ -11814,11 +11812,11 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData,username) {
     logDate = `${days} days`
 
     // Take time, org/repo parameters and init array to get all commits
-    const jsonData = {}
-    const uniqueOids = []
     console.log(`Retrieving ${logDate} of ${usernames} commits in ${org}/${repo}:`)
     console.log(' ')
     for (const username of usernames){ 
+    const jsonData = {}
+    const uniqueOids = []  
     getUserIdResult = await octokit.graphql({
       query,
       username: username
