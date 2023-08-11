@@ -11706,7 +11706,9 @@ const octokit = new MyOctokit({
 
 ///////////////// added by nadeem ///////////////////////////
 // Query all commits of given user in all Repos of org from given time
-async function getAllBranchComits(uid,from,uniqueOids,jsonData,username) {
+async function getAllBranchComits(uid,from,username) {
+  let jsonData = {}
+  let uniqueOids = [] 
   let paginationMember = null
   const query = `query ($org: String!, $repo: String!, $uid: ID, $from: GitTimestamp, $after: String) {
     repository(name: $repo, owner: $org) {
@@ -11762,7 +11764,7 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData,username) {
         paginationMember = null
       }
 
-      const oidSet = new Set();
+      let oidSet = new Set();
       
         getComitResult.repository.refs.edges.forEach((edge) => {
           if (edge.node.target.history.edges.length > 0) {
@@ -11779,7 +11781,7 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData,username) {
   } catch (error) {
     core.setFailed(error.message)
   }
-  const totalcommits = uniqueOids.length
+  let totalcommits = uniqueOids.length
   console.log(`${username}, ${totalcommits}`)
   //console.log('')
   console.log('Details of commits is:')
@@ -11815,14 +11817,14 @@ async function getAllBranchComits(uid,from,uniqueOids,jsonData,username) {
     console.log(`Retrieving ${logDate} of ${usernames} commits in ${org}/${repo}:`)
     console.log(' ')
     for (const username of usernames){ 
-    const jsonData = {}
-    const uniqueOids = []  
+    //const jsonData = {}
+    //const uniqueOids = []  
     getUserIdResult = await octokit.graphql({
       query,
       username: username
     })
     const uid = getUserIdResult.user.id  
-    await getAllBranchComits(uid,from,uniqueOids,jsonData,username)
+    await getAllBranchComits(uid,from,username)
     }
   } catch (error) {
     core.setFailed(error.message)
