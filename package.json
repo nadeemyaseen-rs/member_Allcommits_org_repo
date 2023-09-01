@@ -30,6 +30,6 @@
     "@octokit/plugin-retry": "^3.0.9",
     "@octokit/plugin-throttling": "^6.1.0",
     "array-sort": "^1.0.0",
-    "csv-stringify": "^6.4.0"
+    "csv-stringify": "^6.4.2"
   }
 }
